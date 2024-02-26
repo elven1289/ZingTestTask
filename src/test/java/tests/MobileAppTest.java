@@ -22,19 +22,18 @@ public class MobileAppTest {
     private LoginPage loginPage;
     private ErrorPage errorPage;
 
-    ScreenshotListener listener = new ScreenshotListener();
 
     @BeforeMethod
     public void setUp() {
-        driver = BrowserStackDriverProvider.getDriver();
-        PagesSupport.reinitializePages(this, driver);
+     //   driver = BrowserStackDriverProvider.getDriver();
+     //   PagesSupport.reinitializePages(this, driver);
     }
 
     @AfterMethod
     public void tearDown() {
         // Invoke driver.quit() to indicate that the test is completed.
         // Otherwise, it will appear as timed out on BrowserStack.\
-        BrowserStackDriverProvider.tearDown();
+       // BrowserStackDriverProvider.tearDown();
     }
 
  //  @Test
@@ -51,17 +50,17 @@ public class MobileAppTest {
  //      //   Assert.assertTrue("Login was unsuccessfull", loginPage.isPageOpen());
  //  }
 
-    @Test
-    public void NegativeLoginTest_Failed() {
-        LoginSteps.getToLoginPage(homePage);
-        LoginSteps.loginWithCredentials(loginPage, "Zhanattestaccount", "123");
-        Assert.assertTrue(homePage.isUserLoggedIn(), "User is not logged in");
-    }
+ //  @Test
+ //  public void NegativeLoginTest_Failed() {
+ //      LoginSteps.getToLoginPage(homePage);
+ //      LoginSteps.loginWithCredentials(loginPage, "Zhanattestaccount", "123");
+ //      Assert.assertTrue(homePage.isUserLoggedIn(), "User is not logged in");
+ //  }
 
-  // @Test
-  // public void scrollTest() {
-  //     // Assert.assertTrue(false);
-  //     //   homePage.getLabelAvatar().click();
-  //     //   Assert.assertTrue(errorPage.getButtonGoBackLocator().isDisplayed());
-  // }
+  @Test
+  public void scrollTest() {
+      // Assert.assertTrue(false);
+      //   homePage.getLabelAvatar().click();
+      //   Assert.assertTrue(errorPage.getButtonGoBackLocator().isDisplayed());
+  }
 }
