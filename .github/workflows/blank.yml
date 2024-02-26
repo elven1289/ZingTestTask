@@ -31,3 +31,9 @@ jobs:
           architecture: x64
       - name: Run tests with Maven
         run: mvn site
+      - name: Upload
+        run: mkdir staging && cp target/site/* staging
+        uses: actions/upload-artifact@v3
+        with:
+          name: TestReport
+          path: staging
