@@ -16,16 +16,31 @@ import java.util.Map;
 
 public class BrowserStackDriverProvider {
 
-    public AndroidDriver driver;
+    public static BrowserStackDriverProvider provider = new BrowserStackDriverProvider();
+    public static AndroidDriver driver;
     public String userName;
     public String accessKey;
     public UiAutomator2Options options;
-    public static Map<String, Object> browserStackYamlMap;
-    public static final String USER_DIR = "user.dir";
+    public Map<String, Object> browserStackYamlMap;
+    public final String USER_DIR = "user.dir";
+
+    public static void tearDown() {
+        // Invoke driver.quit() to indicate that the test is completed.
+        // Otherwise, it will appear as timed out on BrowserStack.
+        driver.quit();
+        driver = null;
+    }
+
+    public static AndroidDriver getDriver() {
+        if (driver == null) {
+            provider.setUp();
+        }
+        return driver;
+    }
 
     public BrowserStackDriverProvider() {
         File file = new File(getUserDir() + "/browserstack.yml");
-        this.browserStackYamlMap = convertYamlFileToMap(file, new HashMap<>());
+        browserStackYamlMap = convertYamlFileToMap(file, new HashMap<>());
     }
 
     public void setUp() {
@@ -41,21 +56,6 @@ public class BrowserStackDriverProvider {
             throw new RuntimeException(e);
         }
     }
-
-    public void tearDown() {
-        // Invoke driver.quit() to indicate that the test is completed.
-        // Otherwise, it will appear as timed out on BrowserStack.
-        driver.quit();
-        driver = null;
-    }
-
-    public AndroidDriver getDriver() {
-        if (this.driver == null) {
-            this.setUp();
-        }
-        return driver;
-    }
-
     private String getUserDir() {
         return System.getProperty(USER_DIR);
     }
