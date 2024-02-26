@@ -33,7 +33,7 @@ jobs:
         run: mvn site
       - name: Upload
         run: mkdir staging && cp -r target/site/* staging
-        uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v3
         with:
           name: TestReport
           path: staging
