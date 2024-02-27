@@ -32,7 +32,8 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                 <suiteXmlFiles>
-                    <file>testNG.xml</file>
+                    <file>testNG_Mobile.xml</file>
+                    <file>testNG_Backend.xml</file>
                 </suiteXmlFiles>
                 </configuration>
             </plugin>
@@ -45,11 +46,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>2.7</version>
-            </plugin>
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.10.0</version>
             </plugin>
         </plugins>
     </build>
@@ -68,11 +64,13 @@
             <artifactId>commons-io</artifactId>
             <version>2.11.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.4.0</version>
         </dependency>
+
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
@@ -85,6 +83,21 @@
             <artifactId>snakeyaml</artifactId>
             <version>2.2</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.4.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+
 
     </dependencies>
 </project>

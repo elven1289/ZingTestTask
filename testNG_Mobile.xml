@@ -4,7 +4,7 @@
     <listeners>
         <listener class-name="support.ScreenshotListener"/>
     </listeners>
-    <test name="Listeners_program">
+    <test name="test with listeners">
         <classes>
             <class name="tests.MobileAppTest"></class>
         </classes>
