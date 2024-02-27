@@ -9,6 +9,7 @@ Components:
  - Appium
  - BrowserStack
  - RestAssured
+ - TestNG
 
 Please note that a trial BrowserStack account is used that allows only 100 minutes of execution.
 At the time of task submission it was a fresh trial.
