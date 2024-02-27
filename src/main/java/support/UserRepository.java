@@ -15,11 +15,11 @@ public class UserRepository {
     public ArrayList<User> users;
 
     public UserRepository() throws FileNotFoundException {
-        users = ((Users) new Gson().fromJson(new JsonReader(new FileReader(new File("").getAbsolutePath() +"\\src\\test\\resources\\users.json")), Users.class)).users;
+        users = ((Users) new Gson().fromJson(new JsonReader(new FileReader(UserRepository.class.getClassLoader().getResource("users.json").getPath())), Users.class)).users;
     }
 
     public User getUserByTag(String tag) {
-        return users.stream().filter(p->p.tag.equals(tag)).findFirst().get();
+        return users.stream().filter(p -> p.tag.equals(tag)).findFirst().get();
     }
 
 }
