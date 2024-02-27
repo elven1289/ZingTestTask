@@ -2,8 +2,9 @@ package web.response.me;
 
 import com.google.gson.Gson;
 
-import static io.restassured.RestAssured.given;
-
+/**
+ * POJO class for auth/me API
+ */
 public class MeResponse {
     public int id;
     public String firstName;
@@ -34,6 +35,11 @@ public class MeResponse {
     public String userAgent;
     public Crypto crypto;
 
+    /**
+     * Function that is used to parse json string into an instance of MeResponse
+     * @param json - string to be parsed
+     * @return parsed instance of MeResponse
+     */
     public static MeResponse parseJson(String json) {
         return new Gson().fromJson(json, MeResponse.class);
     }

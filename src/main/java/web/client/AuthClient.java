@@ -9,8 +9,14 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
+/**
+ * Client class that is used to communicate with auth/login API
+ */
 public class AuthClient extends CommonClient {
 
+    /**
+     * Name of the property where host for the api is stored
+     */
     private String property = "authHost";
 
     public AuthClient() {

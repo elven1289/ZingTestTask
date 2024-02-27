@@ -22,7 +22,5 @@ public class ErrorPage extends CommonPage {
     public WebElement getButtonGoBackLocator() {
         return new WebDriverWait(driver, Duration.ofSeconds(30)).until(
                 ExpectedConditions.elementToBeClickable(buttonGoBackLocator));
-
-
     }
 }

@@ -12,23 +12,37 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
+/***
+ * This class is used to provide driver instances for classes used in testing
+ * It setups browserstack configuration from either prepared values
+ * or from browserstack.yaml that is used to provide certain properties
+ */
 public class BrowserStackDriverProvider {
 
     public static BrowserStackDriverProvider provider = new BrowserStackDriverProvider();
-    public static AndroidDriver driver;
-    public String userName;
-    public String accessKey;
-    public UiAutomator2Options options;
-    public Map<String, Object> browserStackYamlMap;
-    public final String USER_DIR = "user.dir";
+    private static AndroidDriver driver;
+    private String userName;
+    private String accessKey;
+    private UiAutomator2Options options;
+    private Map<String, Object> browserStackYamlMap;
+    private final String USER_DIR = "user.dir";
 
+    /**
+     * The method is used to standardize tearDown process
+     * Invoke driver.quit() to indicate that the test is completed.
+     * Otherwise, it will appear as timed out on BrowserStack.
+     */
     public static void tearDown() {
-        // Invoke driver.quit() to indicate that the test is completed.
-        // Otherwise, it will appear as timed out on BrowserStack.
         driver.quit();
         driver = null;
     }
 
+    /**
+     * This is sole point for the user to request driver instance from provider.
+     * Will initialize driver if it is not initialized
+     *
+     * @return instance of a driver
+     */
     public static AndroidDriver getDriver() {
         if (driver == null) {
             provider.setUp();
@@ -36,12 +50,18 @@ public class BrowserStackDriverProvider {
         return driver;
     }
 
-    public BrowserStackDriverProvider() {
-        File file = new File(getUserDir() + "/browserstack.yml");
+    /**
+     * Constructor that is used to init singleton instance of provider
+     */
+    private BrowserStackDriverProvider() {
+        File file = new File(System.getProperty(USER_DIR) + "/browserstack.yml");
         browserStackYamlMap = convertYamlFileToMap(file, new HashMap<>());
     }
 
-    public void setUp() {
+    /**
+     * Internal method that is used to setup instance of a driver
+     */
+    private void setUp() {
         options = new UiAutomator2Options();
         userName = System.getenv("BROWSERSTACK_USERNAME") != null ? System.getenv("BROWSERSTACK_USERNAME") : (String) browserStackYamlMap.get("userName");
         accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY") != null ? System.getenv("BROWSERSTACK_ACCESS_KEY") : (String) browserStackYamlMap.get("accessKey");
@@ -53,9 +73,6 @@ public class BrowserStackDriverProvider {
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
-    }
-    private String getUserDir() {
-        return System.getProperty(USER_DIR);
     }
 
     private Map<String, Object> convertYamlFileToMap(File yamlFile, Map<String, Object> map) {

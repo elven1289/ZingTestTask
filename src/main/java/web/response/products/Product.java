@@ -2,6 +2,9 @@ package web.response.products;
 
 import java.util.ArrayList;
 
+/**
+ * POJO class for auth/products API
+ */
 public class Product{
     public int id;
     public String title;

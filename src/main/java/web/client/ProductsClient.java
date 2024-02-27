@@ -6,6 +6,9 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
+/**
+ * Client class that is used to communicate with auth/product API
+ */
 public class ProductsClient extends CommonClient {
     private String property = "productsHost";
 

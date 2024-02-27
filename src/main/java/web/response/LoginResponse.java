@@ -1,5 +1,8 @@
 package web.response;
 
+/**
+ * POJO class for auth/login API
+ */
 public class LoginResponse {
     private Integer id;
     private String username;

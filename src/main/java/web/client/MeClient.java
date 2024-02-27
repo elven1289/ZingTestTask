@@ -8,6 +8,9 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
+/**
+ * Client class that is used to communicate with auth/me API
+ */
 public class MeClient extends CommonClient {
 
     private String property = "meHost";

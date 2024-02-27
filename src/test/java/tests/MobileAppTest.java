@@ -26,6 +26,9 @@ public class MobileAppTest {
     private ErrorPage errorPage;
     private User validUser;
 
+    /**
+     * Before test hook that is used to set up values for test execution
+     */
     @BeforeMethod
     public void setUp() throws FileNotFoundException {
         UserRepository userRepository = new UserRepository();
@@ -34,13 +37,15 @@ public class MobileAppTest {
         PagesSupport.reinitializePages(this, driver);
     }
 
+    /**
+     * After test hook that is used to properly stop test execution
+     */
     @AfterMethod
     public void tearDown() {
-        // Invoke driver.quit() to indicate that the test is completed.
-        // Otherwise, it will appear as timed out on BrowserStack.\
         BrowserStackDriverProvider.tearDown();
     }
 
+    // Positive login test
     @Test
     public void LoginTest() {
         LoginSteps.getToLoginPage(homePage);
@@ -48,6 +53,7 @@ public class MobileAppTest {
         Assert.assertTrue(homePage.isUserLoggedIn(), "User is not logged in");
     }
 
+    // Negative login test
     @Test
     public void NegativeLoginTest() {
         LoginSteps.getToLoginPage(homePage);
@@ -55,6 +61,7 @@ public class MobileAppTest {
         Assert.assertTrue(loginPage.isPageOpen(), "Login was unsuccessfull");
     }
 
+    // Negative login test that is expected to fail
     @Test
     public void NegativeLoginTest_Failed() {
         LoginSteps.getToLoginPage(homePage);
@@ -62,6 +69,7 @@ public class MobileAppTest {
         Assert.assertTrue(homePage.isUserLoggedIn(), "User is not logged in");
     }
 
+    // Scrolling test that scrolls to an element out of view and interacts with it
     @Test
     public void scrollTest() {
         homePage.getLabelAvatar().click();

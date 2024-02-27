@@ -17,6 +17,9 @@ public class AuthTest {
 
     public AuthClient authClient = new AuthClient();
 
+    /**
+     * Before test hook that is used to set up values for test execution
+     */
     @BeforeMethod
     public void URLsetup() throws IOException {
         Properties prop = new Properties();
@@ -24,6 +27,7 @@ public class AuthTest {
         RestAssured.baseURI = prop.getProperty("baseUrl");
     }
 
+    // Positive auth test
     @Test
     public void authTest() throws FileNotFoundException {
         UserRepository userRepository = new UserRepository();
@@ -34,6 +38,7 @@ public class AuthTest {
         Assert.assertEquals(authClient.getLoginResponseCode(request), 200, "Returned status code is not valid");
     }
 
+    // Negative auth test
     @Test
     public void authTestNegative() throws FileNotFoundException {
         UserRepository userRepository = new UserRepository();

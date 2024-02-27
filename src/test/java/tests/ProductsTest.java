@@ -16,10 +16,14 @@ import web.response.products.ProductsResponse;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ProductsTest {
+public class
+ProductsTest {
     public AuthClient authClient = new AuthClient();
     public ProductsClient productsClient = new ProductsClient();
 
+    /**
+     * Before test hook that is used to set up values for test execution
+     */
     @BeforeMethod
     public void setup() throws IOException {
         Properties prop = new Properties();
@@ -36,11 +40,13 @@ public class ProductsTest {
         productsClient.updateToken(token);
     }
 
+    // Data provider method for product positive test
     @DataProvider(name = "data-provider")
     public Object[][] dpMethod() {
         return new Object[][]{{19, "Skin Beauty Serum."}, {20, "Freckle Treatment Cream- 15gm"}};
     }
 
+    // Product positive test
     @Test(dataProvider = "data-provider")
     public void productsResponseTest(int testId, String name) {
         Response response = productsClient.getRestAssuredResponse();
@@ -48,12 +54,11 @@ public class ProductsTest {
         Assert.assertEquals(ProductsResponse.parseJson(response.asString()).products.stream().filter(p -> p.id == testId).findFirst().get().title, name, "Value with id " + testId + " has invalid name");
     }
 
+    // Product negative test
     @Test
     public void productsResponseNegative() {
         productsClient.updateToken("123");
         Response response = productsClient.getRestAssuredResponse();
         Assert.assertEquals(response.getStatusCode(), 401, "Unexpected status code for a request with invalid auth token");
     }
-
-
 }

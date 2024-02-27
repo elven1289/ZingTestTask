@@ -5,11 +5,13 @@ import com.google.gson.stream.JsonReader;
 import support.entities.User;
 import support.entities.Users;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+/**
+ * Class that is used to get users that would be used in testing
+ */
 public class UserRepository {
 
     public ArrayList<User> users;

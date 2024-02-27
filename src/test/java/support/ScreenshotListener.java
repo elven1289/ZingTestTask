@@ -14,6 +14,9 @@ import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * TestNG Listener that saves a screenshot on Mobile test failure and adds it into testing report
+ */
 public class ScreenshotListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
@@ -24,7 +27,7 @@ public class ScreenshotListener implements ITestListener {
             try {
                 File scrFile = ((TakesScreenshot) BrowserStackDriverProvider.getDriver()).getScreenshotAs(OutputType.FILE);
                 String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/target/surefire-reports";
-                File destFile = new File( reportDirectory + "/failure_screenshots/" + methodName + "_" + formater.format(calendar.getTime()) + ".png");
+                File destFile = new File(reportDirectory + "/failure_screenshots/" + methodName + "_" + formater.format(calendar.getTime()) + ".png");
                 FileUtils.copyFile(scrFile, destFile);
                 URI relative = new File(reportDirectory).toURI().relativize(destFile.toURI());
                 Reporter.log("<a href='" + relative.getPath() + "'> <img src='" + relative.getPath() + "' height='1158' width='540'/> </a>");

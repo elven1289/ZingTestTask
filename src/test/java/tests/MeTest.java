@@ -19,6 +19,9 @@ public class MeTest {
     public AuthClient authClient = new AuthClient();
     public MeClient meClient = new MeClient();
 
+    /**
+     * Before test hook that is used to set up values for test execution
+     */
     @BeforeMethod
     public void setup() throws IOException {
         Properties prop = new Properties();
@@ -35,6 +38,7 @@ public class MeTest {
         meClient.updateToken(token);
     }
 
+    // Positive me api test
     @Test
     public void meResponseTest() {
         Response response = meClient.getRestAssuredResponse();
@@ -42,6 +46,7 @@ public class MeTest {
         Assert.assertEquals(MeResponse.parseJson(response.asString()).company.address.city, "Salinas", "City is not valid");
     }
 
+    // Negative me api test
     @Test
     public void meResponseNegative() {
         meClient.updateToken("123");
@@ -49,6 +54,7 @@ public class MeTest {
         Assert.assertEquals(response.getStatusCode(), 401, "Unexpected status code for a request with invalid auth token");
     }
 
+    // Negative me api test that is expected to fail
     @Test
     public void meResponseNegative_failed() {
         Response response = meClient.getRestAssuredResponse();
