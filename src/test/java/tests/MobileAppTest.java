@@ -64,7 +64,6 @@ public class MobileAppTest {
 
     @Test
     public void scrollTest() {
-        Assert.assertTrue(false);
         homePage.getLabelAvatar().click();
         Assert.assertTrue(errorPage.getButtonGoBackLocator().isDisplayed());
     }
