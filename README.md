@@ -25,7 +25,7 @@ Annotation @AndroidBy and therefore PageFactory class were not used due to exist
 
 How to:
  - Local execution: download the project and run command mvn test. Test report would be put into folder /target/surefire-report
- - CI execution: Proceed to GitHub actions,
+ - CI execution: Proceed to GitHub actions as a logged in GitHub user,
    select CI flow
    <kbd> ![image](https://github.com/elven1289/ZingTestTask/assets/8339456/43cbfc0b-975e-461b-885a-b865130abc26) </kbd>
    
